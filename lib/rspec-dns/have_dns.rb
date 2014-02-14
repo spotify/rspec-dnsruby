@@ -42,7 +42,7 @@ RSpec::Matchers.define :have_dns do
 
   failure_message_for_should do |actual|
     if !@exceptions.empty?
-      "got #{@exceptions.size} exception(s):\n#{@exceptions.join("\n")}"
+      "tried to look up #{actual} but got #{@exceptions.size} exception(s): #{@exceptions.join(", ")}"
     elsif @refuse_request
       "expected #{actual} to have request refused"
     elsif @at_least
