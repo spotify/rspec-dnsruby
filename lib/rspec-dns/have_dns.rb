@@ -90,7 +90,7 @@ RSpec::Matchers.define :have_dns do
   def _config
     @config ||= if File.exists?(_config_file)
       require 'yaml'
-      config = _symbolize_keys(YAML::load(ERB.new(File.read(_config_file) ).result))
+      YAML::load(ERB.new(File.read(_config_file) ).result).symbolize_keys
     else
       nil
     end
@@ -98,21 +98,6 @@ RSpec::Matchers.define :have_dns do
 
   def _config_file
     File.join('config', 'dns.yml')
-  end
-
-  def _symbolize_keys(hash)
-    hash.inject({}){|result, (key, value)|
-      new_key = case key
-                when String then key.to_sym
-                else key
-                end
-      new_value = case value
-                  when Hash then _symbolize_keys(value)
-                  else value
-                  end
-      result[new_key] = new_value
-      result
-    }
   end
 
   def _options
@@ -141,11 +126,11 @@ RSpec::Matchers.define :have_dns do
   end
 
   def _pretty_print_options
-    "\n  (#{_options.sort.collect{ |k,v| "#{k}:#{v.inspect}" }.join(', ')})\n"
+    "\n  (#{_options.sort.map { |k, v| "#{k}:#{v.inspect}" }.join(', ')})\n"
   end
 
   def _pretty_print_records
-    "\n" + @records.collect{ |r| r.to_s }.join("\n")
+    "\n" + @records.map { |r| r.to_s }.join("\n")
   end
 
 end

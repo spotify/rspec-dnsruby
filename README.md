@@ -1,29 +1,38 @@
-rspec-dns
+rspec-dnsruby
 =========
-RSpec DNS is an rspec plugin for easy DNS testing. It uses dnsruby and is customizable.
+rspec-dnsruby is an rspec plugin for easy DNS testing. It is a fork of rspec-dns and uses dnsruby instead of the standard ruby library.
+
+Differences from rspec-dns
+--------------------------
+
+* dependency on dnsruby and activesupport
+* additional matchers: `at_least`, `in_authority`, `refuse_request`
+* a bit different API for the chain methods because of dnsruby
+
+Dnsruby was chosen because it gives a complete DNS implementation, including DNSSEC.
 
 Installation
 ------------
 If you're using bundler, add this line to your application's `Gemfile`:
 
 ```ruby
-gem 'rspec-dns'
+gem 'rspec-dnsruby'
 ```
 
 Don't forget to run the `bundle` command to install.
 
 Or install it manually with:
 
-    $ gem install rspec-dns
+    $ gem install rspec-dnsruby
 
 Usage
 -----
-RSpec DNS is best described by example. First, require `rspec-dns` in your `spec_helper.rb`:
+RSpec DNS is best described by example. First, require `rspec-dnsruby` in your `spec_helper.rb`:
 
 ```ruby
 # spec/spec_helper.rb
 require 'rspec'
-require 'rspec-dns'
+require 'rspec-dnsruby'
 ```
 
 Then, create a spec like this:
@@ -152,6 +161,7 @@ License & Authors
 ```text
 Copyright 2012-2013 Seth Vargo
 Copyright 2012-2013 CustomInk, LLC
+Copyright 2013-2014 Spotify AB
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
