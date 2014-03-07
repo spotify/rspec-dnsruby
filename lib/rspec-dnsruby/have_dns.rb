@@ -1,5 +1,3 @@
-require 'dnsruby'
-
 RSpec::Matchers.define :have_dns do
   match do |dns|
     @dns = dns
