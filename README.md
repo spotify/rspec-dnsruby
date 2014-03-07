@@ -135,7 +135,19 @@ nameserver:
 
 If this file is missing Resolv will use the settings in /etc/resolv.conf.
 
-If you need to change the [timeout](http://dnsruby.rubyforge.org/classes/Dnsruby/Resolver.html) you can do so like this:
+The full list of configuration options can be found on the [Dnsruby docs](http://dnsruby.rubyforge.org/classes/Dnsruby/Config.html).
+
+### Configuring connection timeout
+
+Connection timeout is to stop waiting for resolver.
+If you want to wait over default timeout `1`,
+you can change the timeout in spec files or spec_helpers like this:
+
+```ruby
+RSpec.configuration.rspec_dns_connection_timeout = 5
+```
+
+alternatively you can specify it in the `config/dns.yml` file:
 
 ```yaml
 nameserver:
@@ -143,8 +155,6 @@ nameserver:
   - 6.7.8.9
 timeouts: 3
 ```
-
-The full list of configuration options can be found on the [Dnsruby docs](http://dnsruby.rubyforge.org/classes/Dnsruby/Config.html).
 
 Contributing
 ------------

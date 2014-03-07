@@ -1,3 +1,7 @@
+RSpec.configure do |c|
+  c.add_setting :rspec_dns_connection_timeout, :default => 1
+end
+
 RSpec::Matchers.define :have_dns do
   match do |dns|
     @dns = dns
@@ -104,11 +108,12 @@ RSpec::Matchers.define :have_dns do
 
   def _records
     @_records ||= begin
-      Timeout::timeout(10) do
-        config = _config || {}
+      config = _config || {}
+      # Backwards compatible config option for rspec-dnsruby
+      query_timeout = config[:timeouts] || RSpec.configuration.rspec_dns_connection_timeout
+      Timeout::timeout(query_timeout + 0.2) do
         resolver =  Dnsruby::Resolver.new(config)
-        # Backwards compatible config option from the version which uses ruby stdlib
-        resolver.query_timeout = config[:timeouts] if config[:timeouts]
+        resolver.query_timeout = query_timeout
         resolver.query(@dns, Dnsruby::Types.ANY)
       end
     rescue Exception => e
