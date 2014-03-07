@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.version       = '0.1.0'
+  s.version       = '0.1.1'
   s.name          = 'rspec-dnsruby'
   s.authors       = ['Alexey Lapitsky', 'Johannes Russek']
   s.email         = 'alexey@spotify.com'

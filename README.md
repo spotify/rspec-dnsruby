@@ -1,5 +1,8 @@
 rspec-dnsruby
 =========
+
+[![Build Status](https://travis-ci.org/vzctl/rspec-dnsruby.png?branch=master)](https://travis-ci.org/vzctl/rspec-dnsruby)
+
 rspec-dnsruby is an rspec plugin for easy DNS testing. It is a fork of rspec-dns and uses dnsruby instead of the standard ruby library.
 
 Differences from rspec-dns
@@ -161,6 +164,8 @@ Contributing
 1. Fork the project on github
 2. Create your feature branch
 3. Open a Pull Request
+
+
 
 License & Authors
 -----------------

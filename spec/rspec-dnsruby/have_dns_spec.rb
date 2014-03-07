@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'dnsruby'
+require 'resolv'
 require_relative '../../lib/rspec-dnsruby'
 
 def stub_records(strings)
